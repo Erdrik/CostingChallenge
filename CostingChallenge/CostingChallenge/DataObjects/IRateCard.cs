@@ -5,7 +5,12 @@
 
 namespace CostingChallenge.DataObjects
 {
-    using System.Collections.Generic;
+    /// <summary>
+    /// For calculating specific costs for an edge.
+    /// </summary>
+    /// <param name="edge">The edge in question.</param>
+    /// <returns>The cost of that edge.</returns>
+    public delegate int SpecificEdgeCost(Edge edge);
 
     /// <summary>
     /// A rate card for determining the costs of orders.
@@ -32,7 +37,7 @@ namespace CostingChallenge.DataObjects
         /// <param name="sourceNode">The given source node.</param>
         /// <param name="targetNode">The given target node.</param>
         /// <param name="cost">The cost of this given specific cost.</param>
-        void AddSpecificTrenchItem(NodeType sourceNode, NodeType targetNode, int cost);
+        void AddSpecificTrenchItem(NodeType sourceNode, NodeType targetNode, SpecificEdgeCost cost);
 
         /// <summary>
         /// Gets the cost of a given node in the rate card.

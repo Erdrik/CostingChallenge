@@ -20,6 +20,7 @@ namespace CostingChallenge.DataObjects
         {
             this.NodeCosts = new Dictionary<NodeType, int>();
             this.EdgeCosts = new Dictionary<EdgeType, int>();
+            this.SpecificEdgeCosts = new Dictionary<(NodeType, NodeType), SpecificEdgeCost>();
         }
 
         /// <summary>
@@ -31,6 +32,11 @@ namespace CostingChallenge.DataObjects
         /// Gets or sets the items and their costs.
         /// </summary>
         private Dictionary<EdgeType, int> EdgeCosts { get; set; }
+
+        /// <summary>
+        /// Gets or sets the specific edge costs.
+        /// </summary>
+        private Dictionary<(NodeType, NodeType), SpecificEdgeCost> SpecificEdgeCosts { get; set; }
 
         /// <inheritdoc/>
         public void AddItem(NodeType nodeType, int cost)
@@ -46,9 +52,16 @@ namespace CostingChallenge.DataObjects
         }
 
         /// <inheritdoc/>
-        public void AddSpecificTrenchItem(NodeType sourceNode, NodeType targetNode, int cost)
+        public void AddSpecificTrenchItem(NodeType sourceNodeType, NodeType targetNodeType, SpecificEdgeCost cost)
         {
-            throw new NotImplementedException();
+            if (this.SpecificEdgeCosts.ContainsKey((sourceNodeType, targetNodeType)))
+            {
+                throw new ArgumentException($"The item[({sourceNodeType}, {targetNodeType})] has already been added to this rate card with a cost.");
+            }
+            else
+            {
+                this.SpecificEdgeCosts.Add((sourceNodeType, targetNodeType), cost);
+            }
         }
 
         /// <inheritdoc/>
@@ -80,7 +93,11 @@ namespace CostingChallenge.DataObjects
         /// <inheritdoc/>
         public int GetEdgeCost(Edge item)
         {
-            if (this.EdgeCosts.ContainsKey(item.Type))
+            if (this.SpecificEdgeCosts.ContainsKey((item.Source.Type, item.Target.Type)))
+            {
+                return this.SpecificEdgeCosts[(item.Source.Type, item.Target.Type)](item);
+            }
+            else if (this.EdgeCosts.ContainsKey(item.Type))
             {
                 return this.EdgeCosts[item.Type];
             }

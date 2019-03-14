@@ -71,5 +71,21 @@ namespace CostingChallengeTests
                 ++i;
             }
         }
+
+        [Test]
+        public void SpecificEdgeCostCalculatedCorrectly()
+        {
+            var rateCard = new BasicRateCard();
+
+            rateCard.AddSpecificTrenchItem(NodeType.Cabinet, NodeType.Pot, (x) => 20 * x.DistanceMetres);
+
+            var firstNode = new Node(NodeType.Cabinet);
+            var secondNode = new Node(NodeType.Pot);
+
+            var testEdge = new Edge(firstNode, secondNode, EdgeType.Road, 5);
+            var cost = 0;
+            Assert.DoesNotThrow(() => cost = rateCard.GetEdgeCost(testEdge));
+            Assert.AreEqual(100, cost);
+        }
     }
 }
