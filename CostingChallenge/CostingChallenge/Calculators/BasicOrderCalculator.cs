@@ -28,10 +28,14 @@ namespace CostingChallenge.Calculators
         {
             var total = 0;
 
-            var nodes = order.GetNodes();
-            foreach (var node in nodes)
+            foreach (var node in order.GetNodes())
             {
                 total += rateCard.GetNodeCost(node);
+            }
+
+            foreach (var edge in order.GetEdges())
+            {
+                total += rateCard.GetEdgeCost(edge);
             }
 
             return total;
