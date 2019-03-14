@@ -18,18 +18,31 @@ namespace CostingChallenge.DataObjects
         /// </summary>
         public BasicRateCard()
         {
-            this.Items = new Dictionary<string, int>();
+            this.NodeCosts = new Dictionary<NodeType, int>();
+            this.EdgeCosts = new Dictionary<EdgeType, int>();
         }
 
         /// <summary>
         /// Gets or sets the items and their costs.
         /// </summary>
-        private Dictionary<string, int> Items { get; set; }
+        private Dictionary<NodeType, int> NodeCosts { get; set; }
+
+        /// <summary>
+        /// Gets or sets the items and their costs.
+        /// </summary>
+        private Dictionary<EdgeType, int> EdgeCosts { get; set; }
 
         /// <inheritdoc/>
-        public void AddItem(NodeType itemName, int cost)
+        public void AddItem(NodeType nodeType, int cost)
         {
-            throw new NotImplementedException();
+            if (this.NodeCosts.ContainsKey(nodeType))
+            {
+                throw new ArgumentException($"The item[{nodeType}] has already been added to this rate card with a cost of[{this.NodeCosts[nodeType]}].");
+            }
+            else
+            {
+                this.NodeCosts.Add(nodeType, cost);
+            }
         }
 
         /// <inheritdoc/>
@@ -39,21 +52,42 @@ namespace CostingChallenge.DataObjects
         }
 
         /// <inheritdoc/>
-        public void AddTrenchItem(EdgeType edge, int cost)
+        public void AddTrenchItem(EdgeType edgeType, int cost)
         {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public int GetEdgeCost(Edge item)
-        {
-            throw new NotImplementedException();
+            if (this.EdgeCosts.ContainsKey(edgeType))
+            {
+                throw new ArgumentException($"The item[{edgeType}] has already been added to this rate card with a cost of[{this.EdgeCosts[edgeType]}].");
+            }
+            else
+            {
+                this.EdgeCosts.Add(edgeType, cost);
+            }
         }
 
         /// <inheritdoc/>
         public int GetNodeCost(Node item)
         {
-            throw new NotImplementedException();
+            if (this.NodeCosts.ContainsKey(item.Type))
+            {
+                return this.NodeCosts[item.Type];
+            }
+            else
+            {
+                throw new ArgumentException($"This rate card does not contain a cost for node type[{item.Type}].");
+            }
+        }
+
+        /// <inheritdoc/>
+        public int GetEdgeCost(Edge item)
+        {
+            if (this.EdgeCosts.ContainsKey(item.Type))
+            {
+                return this.EdgeCosts[item.Type];
+            }
+            else
+            {
+                throw new ArgumentException($"This rate card does not contain a cost for edge type[{item.Type}].");
+            }
         }
     }
 }

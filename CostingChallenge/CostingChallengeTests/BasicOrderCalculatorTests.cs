@@ -7,7 +7,7 @@
 #pragma warning disable CS1591
 #pragma warning disable SA1600
 
-namespace Tests
+namespace CostingChallengeTests
 {
     using System.Collections.Generic;
     using CostingChallenge.Calculators;

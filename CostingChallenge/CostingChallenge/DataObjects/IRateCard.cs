@@ -15,16 +15,16 @@ namespace CostingChallenge.DataObjects
         /// <summary>
         /// Adds a new item to the rate card.
         /// </summary>
-        /// <param name="itemName">The name of the item.</param>
+        /// <param name="nodeType">The name of the item.</param>
         /// <param name="cost">The cost of the item in this rate card.</param>
-        void AddItem(NodeType itemName, int cost);
+        void AddItem(NodeType nodeType, int cost);
 
         /// <summary>
         /// Adds a default cost to a given edge type.
         /// </summary>
-        /// <param name="edge">The edge type.</param>
+        /// <param name="edgeType">The edge type.</param>
         /// <param name="cost">The cost of the edge.</param>
-        void AddTrenchItem(EdgeType edge, int cost);
+        void AddTrenchItem(EdgeType edgeType, int cost);
 
         /// <summary>
         /// Adds a specific cost to a given edge type.
