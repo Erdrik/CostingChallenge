@@ -31,7 +31,7 @@ namespace CostingChallenge.Calculators
             var nodes = order.GetNodes();
             foreach (var node in nodes)
             {
-                total += rateCard.GetItemCost(node.Name);
+                total += rateCard.GetNodeCost(node);
             }
 
             return total;

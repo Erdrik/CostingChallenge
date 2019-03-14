@@ -6,6 +6,32 @@
 namespace CostingChallenge.DataObjects
 {
     /// <summary>
+    /// The type of the node.
+    /// </summary>
+    public enum NodeType
+    {
+        /// <summary>
+        /// The cabinet type.
+        /// </summary>
+        Cabinet,
+
+        /// <summary>
+        /// The chamber type.
+        /// </summary>
+        Chamber,
+
+        /// <summary>
+        /// The pot type.
+        /// </summary>
+        Pot,
+
+        /// <summary>
+        /// The trench type.
+        /// </summary>
+        Trench,
+    }
+
+    /// <summary>
     /// A node in an order.
     /// </summary>
     public class Node
@@ -13,15 +39,15 @@ namespace CostingChallenge.DataObjects
         /// <summary>
         /// Initializes a new instance of the <see cref="Node"/> class.
         /// </summary>
-        /// <param name="name">The given name.</param>
-        public Node(string name)
+        /// <param name="type">The given type.</param>
+        public Node(NodeType type)
         {
-            this.Name = name;
+            this.Type = type;
         }
 
         /// <summary>
         /// Gets the node's name.
         /// </summary>
-        public string Name { get; private set; }
+        public NodeType Type { get; private set; }
     }
 }

@@ -27,13 +27,31 @@ namespace CostingChallenge.DataObjects
         private Dictionary<string, int> Items { get; set; }
 
         /// <inheritdoc/>
-        public void AddItem(string itemName, int cost)
+        public void AddItem(NodeType itemName, int cost)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
-        public int GetItemCost(string itemName)
+        public void AddSpecificTrenchItem(NodeType sourceNode, NodeType targetNode, int cost)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public void AddTrenchItem(EdgeType edge, int cost)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public int GetEdgeCost(Edge item)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public int GetNodeCost(Node item)
         {
             throw new NotImplementedException();
         }

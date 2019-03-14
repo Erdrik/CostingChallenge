@@ -17,13 +17,35 @@ namespace CostingChallenge.DataObjects
         /// </summary>
         /// <param name="itemName">The name of the item.</param>
         /// <param name="cost">The cost of the item in this rate card.</param>
-        void AddItem(string itemName, int cost);
+        void AddItem(NodeType itemName, int cost);
 
         /// <summary>
-        /// Gets the cost of a given item in the rate card.
+        /// Adds a default cost to a given edge type.
         /// </summary>
-        /// <param name="itemName">The name of the item.</param>
-        /// <returns>The cost of the item.</returns>
-        int GetItemCost(string itemName);
+        /// <param name="edge">The edge type.</param>
+        /// <param name="cost">The cost of the edge.</param>
+        void AddTrenchItem(EdgeType edge, int cost);
+
+        /// <summary>
+        /// Adds a specific cost to a given edge type.
+        /// </summary>
+        /// <param name="sourceNode">The given source node.</param>
+        /// <param name="targetNode">The given target node.</param>
+        /// <param name="cost">The cost of this given specific cost.</param>
+        void AddSpecificTrenchItem(NodeType sourceNode, NodeType targetNode, int cost);
+
+        /// <summary>
+        /// Gets the cost of a given node in the rate card.
+        /// </summary>
+        /// <param name="item">The name of the node.</param>
+        /// <returns>The cost of the node.</returns>
+        int GetNodeCost(Node item);
+
+        /// <summary>
+        /// Gets the cost of a given edge in the rate card.
+        /// </summary>
+        /// <param name="item">The name of the edge.</param>
+        /// <returns>The cost of the edge.</returns>
+        int GetEdgeCost(Edge item);
     }
 }
