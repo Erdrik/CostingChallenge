@@ -18,33 +18,35 @@ namespace Tests
 
     public class CostingChallengeTests
     {
+        private List<Node> goodNodes = new List<Node>
+        {
+            new Node("Cabinet"),
+        };
+
+        private Mock<IOrder> goodOrder;
+
+        private Mock<IRateCard> goodRateCard;
+
         [SetUp]
         public void Setup()
         {
+            this.goodOrder = new Mock<IOrder>();
+            this.goodOrder.Setup(m => m.GetNodes()).Returns(this.goodNodes);
+
+            this.goodRateCard = new Mock<IRateCard>();
+            this.goodRateCard.Setup(m => m.GetItemCost(It.IsAny<string>())).Returns(100);
         }
 
         [Test]
         public void UsingRateCard_WithOneNode_CalculatesCorrectly()
         {
-            var mockReader = new Mock<IOrder>();
-
-            var nodes = new List<Node>
-            {
-                new Node("Cabinet")
-            };
-
-            mockReader.Setup(m => m.GetNodes()).Returns(nodes);
-
-            var mockRateCard = new Mock<IRateCard>();
-            mockRateCard.Setup(m => m.GetItemCost(It.IsAny<string>())).Returns(100);
-
             var calculator = new BasicOrderCalculator();
 
             var total = 0;
             Assert.DoesNotThrow(
                 () =>
                 {
-                    total = calculator.OrderCostAccordingToRateCard(mockReader.Object, mockRateCard.Object);
+                    total = calculator.OrderCostAccordingToRateCard(this.goodOrder.Object, this.goodRateCard.Object);
                 });
 
             Assert.AreEqual(100, total);
