@@ -16,7 +16,7 @@ namespace Tests
     using Moq;
     using NUnit.Framework;
 
-    public class CostingChallengeTests
+    public class BasicOrderCalculatorTests
     {
         private Mock<IOrder> goodOrder;
 
