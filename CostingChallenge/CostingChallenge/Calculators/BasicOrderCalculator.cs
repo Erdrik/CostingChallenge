@@ -26,7 +26,15 @@ namespace CostingChallenge.Calculators
         /// <returns>The order cost.</returns>
         public int OrderCostAccordingToRateCard(IOrder order, IRateCard rateCard)
         {
-            throw new NotImplementedException();
+            var total = 0;
+
+            var nodes = order.GetNodes();
+            foreach (var node in nodes)
+            {
+                total += rateCard.GetItemCost(node.Name);
+            }
+
+            return total;
         }
     }
 }
