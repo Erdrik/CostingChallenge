@@ -1,5 +1,9 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿// <copyright file="AssemblyInfo.cs" company="Samuel Ballard-Adams">
+// Copyright (c) Samuel Ballard-Adams. All rights reserved.
+// Licensed under the GNU General Public License v3 license. See LICENSE file in the project root for full license information.
+// </copyright>
+
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
