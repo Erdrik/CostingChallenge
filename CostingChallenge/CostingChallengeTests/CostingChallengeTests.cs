@@ -18,18 +18,6 @@ namespace Tests
 
     public class CostingChallengeTests
     {
-        private List<Node> oneNode = new List<Node>
-        {
-            new Node("Cabinet"),
-        };
-
-        private List<Node> goodNodes = new List<Node>
-        {
-            new Node("Cabinet"),
-            new Node("Chamber"),
-            new Node("Pot"),
-        };
-
         private Mock<IOrder> goodOrder;
 
         private Mock<IRateCard> goodRateCard;
@@ -48,7 +36,7 @@ namespace Tests
         [Test]
         public void UsingRateCard_WithOneNode_CalculatesCorrectly()
         {
-            this.goodOrder.Setup(m => m.GetNodes()).Returns(this.oneNode);
+            this.SetupOneNode();
 
             var calculator = new BasicOrderCalculator();
 
@@ -65,7 +53,7 @@ namespace Tests
         [Test]
         public void UsingRateCard_MultipleNodesDifferentValues_CalculatesCorrectly()
         {
-            this.goodOrder.Setup(m => m.GetNodes()).Returns(this.goodNodes);
+            this.SetupMultipleNodes();
 
             var calculator = new BasicOrderCalculator();
 
@@ -77,6 +65,28 @@ namespace Tests
                 });
 
             Assert.AreEqual(1300, total);
+        }
+
+        private void SetupOneNode()
+        {
+            var oneNode = new List<Node>
+            {
+                new Node("Cabinet"),
+            };
+
+            this.goodOrder.Setup(m => m.GetNodes()).Returns(oneNode);
+        }
+
+        private void SetupMultipleNodes()
+        {
+             var goodNodes = new List<Node>
+            {
+                new Node("Cabinet"),
+                new Node("Chamber"),
+                new Node("Pot"),
+            };
+
+            this.goodOrder.Setup(m => m.GetNodes()).Returns(goodNodes);
         }
     }
 }
